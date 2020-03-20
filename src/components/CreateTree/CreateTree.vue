@@ -1,19 +1,19 @@
 <template>
     <div>
         <span> 
-          Arrary: {{currentArray}}
+          Arrary: {{currentArrayIndex+1}}
         </span>
         <button class="next-array" @click="switchArray">
           next
         </button>
         <div class="show"> 
-          {{rule}}
+          {{currentArray}}
         </div>
         <div class="arrow">
           ==>
         </div>
         <div class = "show">
-          {{codeString}}
+          {{rule_string}}
         </div>
         <div class="arrow">
           ==>
@@ -26,48 +26,50 @@
 
 <script>
 import {arrayList} from "./RuleCode"
+import {convertArrayToTree, convertArrayToTreeDetail} from "./ArrayToTree"
 export default {
   name: 'CreateTree',
   data () {
     return {
-      rule: '',
-      codeString: '',
-      tree: {},
-      currentArray: '',
       arrays: [],
+      currentArrayIndex: '',
+      currentArray: '',
+      rule_string: '',
+      binaryTree: Object,
+      tree: Object,
     }
   },
 
   mounted(){
-    this.currentArray = 0;
+    this.currentArrayIndex = 0;
     this.arrays = Object.keys(arrayList);
-    this.rule = arrayList[this.arrays[this.currentArray]];
-    this.codeString = this.convertArrayToString(this.rule);
-    this.binaryTree = this.convertStringToBinaryTree(this.codeString);
-    this.tree = this.convertBinaryTreeToMultiTree(this.binaryTree);
+    this.currentArray = arrayList[this.arrays[this.currentArrayIndex]];
+    let temp = convertArrayToTreeDetail(this.currentArray);
+    this.rule_string = temp.rule_string;
+    this.tree = temp.tree;
+    // this.tree = convertArrayToTree(this.currentArray);
   },
 
   methods: {
-
     // 从array中提取出字符串
-    convertArrayToString(a){  
-      let s = "";
-      a.forEach(i => {
-        s = i.uuid === undefined? s+i.value : s+i.uuid;
+    convertArrayToString(array){  
+      let string = "";
+      array.forEach(i => {
+        string += i.uuid === undefined? i.value: i.uuid;
       });
-      return s;
+      return string;
     },
 
     // 将字符串生成树
-    convertStringToBinaryTree(s){
+    convertStringToBinaryTree(string){
       // 如果是叶子则返回值
-      if(this.is_leaf(s)){
+      if(this.is_leaf(string)){
         return {
-          uuid: s,
+          uuid: string,
         };
       }
       // 移除左右多余的括号
-      s = this.remove_outer_brackets(s);
+      string = this.remove_outer_brackets(string);
       let pointer = 0;
       let node = {
         uuid: "",
@@ -75,15 +77,15 @@ export default {
         right_child: {},
       }
       // 尝试通过 "and" 分割
-      while(pointer < s.length){
-        let i = s.indexOf("and", pointer);
+      while(pointer < string.length){
+        let i = string.indexOf("and", pointer);
         if(i === -1){
           break;
         }
         else{
-          const left_part = s.slice(0, i);
-          const right_part = s.slice(i+3);
-          if(this.is_leagl_brackets(left_part)&&this.is_leagl_brackets(right_part)){
+          const left_part = string.slice(0, i);
+          const right_part = string.slice(i+3);
+          if(this.is_leagl_brackets(left_part) && this.is_leagl_brackets(right_part)){
             node.uuid = "and";
             node.left_child = this.convertStringToBinaryTree(left_part);
             node.right_child = this.convertStringToBinaryTree(right_part);
@@ -94,18 +96,17 @@ export default {
           }
         }
       }
-
       // 尝试通过 "or" 分割
       pointer = 0;
-      while(pointer < s.length){
-        let i = s.indexOf("or", pointer);
+      while(pointer < string.length){
+        let i = string.indexOf("or", pointer);
         if(i === -1){
           break;
         }
         else{
-          const left_part = s.slice(0, i);
-          const right_part = s.slice(i+2);
-          if(this.is_leagl_brackets(left_part)&&this.is_leagl_brackets(right_part)){
+          const left_part = string.slice(0, i);
+          const right_part = string.slice(i+2);
+          if(this.is_leagl_brackets(left_part) && this.is_leagl_brackets(right_part)){
             node.uuid = "or";
             node.left_child = this.convertStringToBinaryTree(left_part);
             node.right_child = this.convertStringToBinaryTree(right_part);
@@ -118,6 +119,7 @@ export default {
       }
     },
 
+    // 将二叉树降高变成多叉树
     convertBinaryTreeToMultiTree(node){
       // 运用布尔运算结合律
       if(node.left_child === undefined){
@@ -153,17 +155,18 @@ export default {
 
     // 切换输入案例
     switchArray(){
-      this.currentArray = (this.currentArray + 1 >= this.arrays.length) ? 0: this.currentArray + 1;
-      this.rule = arrayList[this.arrays[this.currentArray]];
-      this.codeString = this.convertArrayToString(arrayList[this.arrays[this.currentArray]]);
-      this.binaryTree = this.convertStringToBinaryTree(this.codeString);
-      this.tree = this.convertBinaryTreeToMultiTree(this.binaryTree);
+      this.currentArrayIndex = (this.currentArrayIndex + 1 >= this.arrays.length) ? 0: this.currentArrayIndex + 1;
+      this.currentArray = arrayList[this.arrays[this.currentArrayIndex]];
+      // this.tree = convertArrayToTree(this.currentArray);
+      let temp = convertArrayToTreeDetail(this.currentArray);
+      this.rule_string = temp.rule_string;
+      this.tree = temp.tree;
       console.log(this.tree);
     },
 
     // 字符串判断是否是叶子节点
     is_leaf(string){
-      return (string.indexOf("and") === -1) && (string.indexOf("or") === -1);
+      return string.indexOf("and") === -1 && string.indexOf("or") === -1;
     },
 
     // 是否去除左右最外层的括号
