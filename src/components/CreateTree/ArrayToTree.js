@@ -43,45 +43,33 @@ function convertStringToBinaryTree(string){
     left_child: {},
     right_child: {},
   }
-  // 尝试通过 "and" 分割
+  // 尝试通过 "and" 或 'or' 分割
   while(pointer >= 0){
     let i = string.lastIndexOf("and", pointer);
-    if(i === -1){
+    let j = string.lastIndexOf("or", pointer);
+    let type = '';
+    if(i === -1 && j === -1){
       break;
     }
-    else{
-      const left_part = string.slice(0, i);
-      const right_part = string.slice(i+3);
-      if(is_leagl_brackets(left_part) && is_leagl_brackets(right_part)){
-        node.uuid = "and";
-        node.left_child = convertStringToBinaryTree(left_part);
-        node.right_child = convertStringToBinaryTree(right_part);
-        return node;
-      }
-      else{
-        pointer = i - 3;
-      }
+    else if(i >= 0 && j === -1){
+      type = 'and'
     }
-  }
-  // 尝试通过 "or" 分割
-  pointer = 0;
-  while(pointer >= 0){
-    let i = string.lastIndexOf("or", pointer);
-    if(i === -1){
-      break;
+    else if(i === -1 && j >= 0){
+      type = 'or';
     }
     else{
-      const left_part = string.slice(0, i);
-      const right_part = string.slice(i+2);
-      if(is_leagl_brackets(left_part) && is_leagl_brackets(right_part)){
-        node.uuid = "or";
-        node.left_child = convertStringToBinaryTree(left_part);
-        node.right_child = convertStringToBinaryTree(right_part);
-        return node;
-      }
-      else{
-        pointer = i - 2;
-      }
+      type = i>=j? 'and': 'or';
+    }
+    const left_part = type==='and'? string.slice(0, i): string.slice(0, j);
+    const right_part = type==='and'? string.slice(i+3): string.slice(j+2);
+    if(is_leagl_brackets(left_part) && is_leagl_brackets(right_part)){
+      node.uuid = type;
+      node.left_child = convertStringToBinaryTree(left_part);
+      node.right_child = convertStringToBinaryTree(right_part);
+      return node;
+    }
+    else{
+      pointer = type === 'and'? i-3: j-2;
     }
   }
 }
@@ -126,7 +114,7 @@ function is_leaf(string){
 
 function remove_outer_brackets(string){
   const inner = string.slice(1, string.length-1);
-  if(string[0] === '[' && string[string.length-1] === ']' && is_leagl_brackets(inner)){
+  if(string[0] === '(' && string[string.length-1] === ')' && is_leagl_brackets(inner)){
     return remove_outer_brackets(inner);
   }
   return string;
@@ -136,10 +124,10 @@ function is_leagl_brackets(string) {
   let array = [];
   for (let i = 0; i < string.length; i++) {
     let item = string[i];
-    if (item === '[') {
-      array.push('[');
+    if (item === '(') {
+      array.push('(');
     } 
-    else if (item === ']') {
+    else if (item === ')') {
       if (array.length === 0) {
         return false;
       } else {

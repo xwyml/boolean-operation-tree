@@ -1,4 +1,157 @@
 export let arrayList= {
+  array0:[{
+    "variableName": "amount_copyright",
+    "variableLabel": "著作权数量",
+    "variableCategory": "企业评级",
+    "datatype": "String",
+    "type": "variable",
+    "uuid": "_25"
+}, {
+    "type": "comparison",
+    "op": "GreaterThen",
+    "uuid": "_26"
+}, {
+    "content": "3",
+    "type": "Input",
+    "uuid": "_27"
+}, {
+    "type": "junction",
+    "value": "and"
+}, {
+    "variableName": "self_0011",
+    "variableLabel": "征信账户状态",
+    "variableCategory": "小微企业主指标",
+    "datatype": "String",
+    "type": "variable",
+    "uuid": "_28"
+}, {
+    "op": "GreaterThenEquals",
+    "type": "comparison",
+    "uuid": "_29"
+}, {
+    "name": "Sin",
+    "label": "求正弦",
+    "parameter": {
+        "objectParameter": {
+            "variableName": "self_0007",
+            "variableLabel": "企业-股权质押比例",
+            "variableCategory": "小微企业指标",
+            "datatype": "String",
+            "valueType": "Variable",
+            "id": "[VAR]小微企业指标.企业-股权质押比例"
+        },
+        "name": "对象",
+        "property": "self_0005",
+        "propertyLabel": "关联企业-占股比例"
+    },
+    "uuid": "_30",
+    "type": "CommonFunction"
+}, {
+    "type": "Operator",
+    "value": "add",
+    "uuid": "_31"
+}, {
+    "type": "Paren",
+    "value": "(",
+}, {
+    "variableName": "self_0005",
+    "variableLabel": "关联企业-占股比例",
+    "variableCategory": "小微企业指标",
+    "datatype": "String",
+    "type": "Variable",
+    "id": "[VAR]小微企业指标.关联企业-占股比例+([VAR]小微企业主指标.年龄*[SIMPLE]2)",
+    "uuid": "_33"
+}, {
+    "type": "Operator",
+    "value": "Add",
+    "uuid": "_34"
+}, {
+    "type": "Paren",
+    "value": "(",
+}, {
+    "variableName": "self_0001",
+    "variableLabel": "年龄",
+    "variableCategory": "小微企业主指标",
+    "datatype": "String",
+    "type": "Variable",
+    "id": "[VAR]小微企业主指标.年龄*[SIMPLE]2",
+    "uuid": "_36"
+}, {
+    "type": "Operator",
+    "value": "Mul",
+    "uuid": "_37"
+}, {
+    "content": "2",
+    "type": "Input",
+    "id": "[SIMPLE]2",
+    "uuid": "_38"
+}, {
+    "type": "Paren",
+    "value": ")",
+}, {
+    "type": "Paren",
+    "value": ")",
+}, {
+    "type": "Operator",
+    "value": "Mul",
+    "uuid": "_41"
+}, {
+    "variableName": "self_0001",
+    "variableLabel": "年龄",
+    "variableCategory": "小微企业主指标",
+    "datatype": "String",
+    "type": "Variable",
+    "id": "[VAR]小微企业主指标.年龄*[SIMPLE]2",
+    "uuid": "_42"
+}, {
+    "type": "junction",
+    "value": "or"
+}, {
+    "type": "Paren",
+    "value": "("
+}, {
+    "type": "Paren",
+    "value": "("
+}, {
+    "variableName": "amount_copyright",
+    "variableLabel": "著作权数量",
+    "variableCategory": "企业评级",
+    "datatype": "String",
+    "type": "variable",
+    "uuid": "_43"
+}, {
+    "type": "comparison",
+    "op": "GreaterThen",
+    "uuid": "_44"
+}, {
+    "content": "3",
+    "type": "Input",
+    "uuid": "_45"
+}, {
+    "type": "junction",
+    "value": "and"
+}, {
+    "variableName": "amount_copyright",
+    "variableLabel": "著作权数量",
+    "variableCategory": "企业评级",
+    "datatype": "String",
+    "type": "variable",
+    "uuid": "_46"
+}, {
+    "type": "comparison",
+    "op": "GreaterThen",
+    "uuid": "_47"
+}, {
+    "content": "3",
+    "type": "Input",
+    "uuid": "_48"
+}, {
+    "type": "Paren",
+    "value": ")"
+}, {
+    "type": "Paren",
+    "value": ")"
+}],
   
   // A and B
   array1: [
@@ -20,7 +173,7 @@ export let arrayList= {
   array2: [
     {
       type: "left_bracket",
-      uuid: '[',
+      uuid: '(',
     },
     {
       type: "expression",
@@ -36,7 +189,7 @@ export let arrayList= {
     },
     {
       type: 'right_bracket',
-      uuid: ']',
+      uuid: ')',
     },
     {
       type: 'operator',
@@ -52,7 +205,7 @@ export let arrayList= {
   array3: [
     {
       type: "left_bracket",
-      uuid: '[',
+      uuid: '(',
     },
     {
       type: "expression",
@@ -68,7 +221,7 @@ export let arrayList= {
     },
     {
       type: 'right_bracket',
-      uuid: ']',
+      uuid: ')',
     },
     {
       type: 'operator',
@@ -81,10 +234,10 @@ export let arrayList= {
   ],
   array4: [
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'A',
@@ -96,7 +249,7 @@ export let arrayList= {
       uuid: 'B',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
       uuid: 'or',
@@ -105,7 +258,7 @@ export let arrayList= {
       uuid: 'C',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
       uuid: 'or',
@@ -116,10 +269,10 @@ export let arrayList= {
   ],
   array5: [
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'A',
@@ -131,13 +284,13 @@ export let arrayList= {
       uuid: 'B',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
       uuid: 'or',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'C',
@@ -149,15 +302,15 @@ export let arrayList= {
       uuid: 'D',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
   ],
   array6: [
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'A',
@@ -169,13 +322,13 @@ export let arrayList= {
       uuid: 'B',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
       uuid: 'and',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'C',
@@ -184,7 +337,7 @@ export let arrayList= {
       uuid: 'and',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'D',
@@ -196,10 +349,10 @@ export let arrayList= {
       uuid: 'E',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
   ],
   array7: [
@@ -210,7 +363,7 @@ export let arrayList= {
       uuid: 'and',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'B',
@@ -219,7 +372,7 @@ export let arrayList= {
       uuid: 'or',
     },
     {
-      uuid: '[',
+      uuid: '(',
     },
     {
       uuid: 'C',
@@ -231,10 +384,10 @@ export let arrayList= {
       uuid: 'D',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
     {
-      uuid: ']',
+      uuid: ')',
     },
   ],
   array8: [
@@ -259,157 +412,4 @@ export let arrayList= {
       uuid: 'C',
     },
   ],
-  array9:[{
-        "variableName": "amount_copyright",
-        "variableLabel": "著作权数量",
-        "variableCategory": "企业评级",
-        "datatype": "String",
-        "type": "variable",
-        "uuid": "_25"
-    }, {
-        "type": "comparison",
-        "op": "GreaterThen",
-        "uuid": "_26"
-    }, {
-        "content": "3",
-        "type": "Input",
-        "uuid": "_27"
-    }, {
-        "type": "junction",
-        "value": "and"
-    }, {
-        "variableName": "self_0011",
-        "variableLabel": "征信账户状态",
-        "variableCategory": "小微企业主指标",
-        "datatype": "String",
-        "type": "variable",
-        "uuid": "_28"
-    }, {
-        "op": "GreaterThenEquals",
-        "type": "comparison",
-        "uuid": "_29"
-    }, {
-        "name": "Sin",
-        "label": "求正弦",
-        "parameter": {
-            "objectParameter": {
-                "variableName": "self_0007",
-                "variableLabel": "企业-股权质押比例",
-                "variableCategory": "小微企业指标",
-                "datatype": "String",
-                "valueType": "Variable",
-                "id": "[VAR]小微企业指标.企业-股权质押比例"
-            },
-            "name": "对象",
-            "property": "self_0005",
-            "propertyLabel": "关联企业-占股比例"
-        },
-        "uuid": "_30",
-        "type": "CommonFunction"
-    }, {
-        "type": "Operator",
-        "value": "add",
-        "uuid": "_31"
-    }, {
-        "type": "Paren",
-        "value": "(",
-    }, {
-        "variableName": "self_0005",
-        "variableLabel": "关联企业-占股比例",
-        "variableCategory": "小微企业指标",
-        "datatype": "String",
-        "type": "Variable",
-        "id": "[VAR]小微企业指标.关联企业-占股比例+([VAR]小微企业主指标.年龄*[SIMPLE]2)",
-        "uuid": "_33"
-    }, {
-        "type": "Operator",
-        "value": "Add",
-        "uuid": "_34"
-    }, {
-        "type": "Paren",
-        "value": "(",
-    }, {
-        "variableName": "self_0001",
-        "variableLabel": "年龄",
-        "variableCategory": "小微企业主指标",
-        "datatype": "String",
-        "type": "Variable",
-        "id": "[VAR]小微企业主指标.年龄*[SIMPLE]2",
-        "uuid": "_36"
-    }, {
-        "type": "Operator",
-        "value": "Mul",
-        "uuid": "_37"
-    }, {
-        "content": "2",
-        "type": "Input",
-        "id": "[SIMPLE]2",
-        "uuid": "_38"
-    }, {
-        "type": "Paren",
-        "value": ")",
-    }, {
-        "type": "Paren",
-        "value": ")",
-    }, {
-        "type": "Operator",
-        "value": "Mul",
-        "uuid": "_41"
-    }, {
-        "variableName": "self_0001",
-        "variableLabel": "年龄",
-        "variableCategory": "小微企业主指标",
-        "datatype": "String",
-        "type": "Variable",
-        "id": "[VAR]小微企业主指标.年龄*[SIMPLE]2",
-        "uuid": "_42"
-    }, {
-        "type": "junction",
-        "value": "or"
-    }, {
-        "type": "Paren",
-        "value": "("
-    }, {
-        "type": "Paren",
-        "value": "("
-    }, {
-        "variableName": "amount_copyright",
-        "variableLabel": "著作权数量",
-        "variableCategory": "企业评级",
-        "datatype": "String",
-        "type": "variable",
-        "uuid": "_43"
-    }, {
-        "type": "comparison",
-        "op": "GreaterThen",
-        "uuid": "_44"
-    }, {
-        "content": "3",
-        "type": "Input",
-        "uuid": "_45"
-    }, {
-        "type": "junction",
-        "value": "and"
-    }, {
-        "variableName": "amount_copyright",
-        "variableLabel": "著作权数量",
-        "variableCategory": "企业评级",
-        "datatype": "String",
-        "type": "variable",
-        "uuid": "_46"
-    }, {
-        "type": "comparison",
-        "op": "GreaterThen",
-        "uuid": "_47"
-    }, {
-        "content": "3",
-        "type": "Input",
-        "uuid": "_48"
-    }, {
-        "type": "Paren",
-        "value": ")"
-    }, {
-        "type": "Paren",
-        "value": ")"
-    }],
 }
